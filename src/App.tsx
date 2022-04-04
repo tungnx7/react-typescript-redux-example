@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "antd/dist/antd.css";
+import LayoutProduct from "./Layout/LayoutProduct";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import { setupAxiosIntansce } from "./utils/setupAxiosInstance";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface Props {}
+interface State {
+  loading: boolean;
+}
+
+declare global {
+  interface Window {
+    test: any;
+  }
+}
+
+class App extends Component<Props, State> {
+  state = {
+    loading: true,
+  };
+
+  constructor(props: Props) {
+    super(props);
+    this.setGlobalWindowVariable();
+  }
+
+  componentDidMount = async () => {
+    await setupAxiosIntansce(() => {});
+    this.setState({ loading: false });
+  };
+
+  setGlobalWindowVariable = () => {
+    window.test = null;
+  };
+
+  render() {
+    return (
+      <Provider store={store}>
+        {this.state.loading ? "Loading..." : <LayoutProduct />}
+      </Provider>
+    );
+  }
 }
 
 export default App;
