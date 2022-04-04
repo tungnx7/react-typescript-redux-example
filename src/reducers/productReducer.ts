@@ -27,6 +27,10 @@ const getProducts = () => async (dispatch: any) => {
   dispatch(setProduct(data.data));
 };
 
+const createProduct = (product: IProduct) => async (dispatch:any) => {
+    const data = await AxiosInstance.post("/products", product);
+}
+
 const setProduct = (product: Array<IProduct>) => {
   return {
     type: ACTION_TYPES.PRODUCT,
@@ -34,4 +38,4 @@ const setProduct = (product: Array<IProduct>) => {
   };
 };
 
-export { productReducer, setProduct, getProducts };
+export { productReducer, setProduct, getProducts, createProduct };

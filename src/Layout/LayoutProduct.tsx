@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Layout } from 'antd';
 import Product from '../components/Product';
 import { IProduct } from "../models/product.model";
-import { getProducts } from '../reducers/productReducer';
+import { createProduct, getProducts } from '../reducers/productReducer';
 import { AxiosInstance } from '../utils/setupAxiosInstance';
 import { store } from '../redux/store';
 import { connect } from 'react-redux';
@@ -12,7 +12,8 @@ const { Header, Footer, Sider, Content } = Layout;
 
 type Props = {
   getProducts: Function,
-  productState: Array<IProduct>
+  productState: Array<IProduct>,
+  createProduct: Function
 }
 
 type State = {}
@@ -26,6 +27,11 @@ class LayoutProduct extends Component<Props, State> {
     this.props.getProducts();
   }
 
+  onAddProduct =  async () => {
+    await this.props.createProduct({ name: "Abccsacas0", price: 131321});
+    this.props.getProducts();
+  }
+
 
   render() {
 
@@ -35,7 +41,8 @@ class LayoutProduct extends Component<Props, State> {
         <Layout>
         <Header>Header</Header>
         <Content>
-          {this.props.productState.map((item)=> <Product data={item} />)}        
+          {this.props.productState.map((item)=> <Product data={item} />)} 
+          <button onClick={this.onAddProduct} >Add</button>      
         </Content>
         <Footer>Footer</Footer>
       </Layout>
@@ -51,7 +58,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-      getProducts: () => dispatch(getProducts())
+      getProducts: () => dispatch(getProducts()),
+      createProduct: (product: IProduct) => dispatch(createProduct(product))
   };
 };
 
