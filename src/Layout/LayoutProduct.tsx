@@ -7,6 +7,8 @@ import { AxiosInstance } from '../utils/setupAxiosInstance';
 import { store } from '../redux/store';
 import { connect } from 'react-redux';
 
+import "./LayoutProduct.css";
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -40,11 +42,10 @@ class LayoutProduct extends Component<Props, State> {
     return (
         <Layout>
         <Header>Header</Header>
+          <button onClick={this.onAddProduct} style={{width: 50, height: 50, marginBottom: 30}}>Add</button>      
         <Content>
-          {this.props.productState.map((item)=> <Product data={item} />)} 
-          <button onClick={this.onAddProduct} >Add</button>      
+          {this.props.productState.map((item, index)=> <Product key={index}  data={item} />)} 
         </Content>
-        <Footer>Footer</Footer>
       </Layout>
     )
   }

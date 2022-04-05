@@ -1,4 +1,4 @@
-import { IProduct, defaultProduct } from "../models/product.model";
+import { IProduct } from "../models/product.model";
 import { AxiosInstance } from "../utils/setupAxiosInstance";
 
 export const ACTION_TYPES = {

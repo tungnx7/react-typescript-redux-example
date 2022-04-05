@@ -5,8 +5,9 @@ import { Layout } from "antd";
 import { Card } from "antd";
 import { Button } from "antd";
 import { IProduct } from "../models/product.model";
+import "./Product.css";
 
-const { Header, Footer, Content } = Layout;
+
 
 type Props = { setProduct: Function; data: IProduct };
 
@@ -16,8 +17,13 @@ export class Product extends Component<Props, State> {
   state = {};
 
   render() {
-    return <Layout>{this.props.data.name}
-      {this.props.data.price}
+    return <Layout>
+      <Card title="Điện thoại" extra={<a href="#">Chi tiết</a>} style={{ width: 330 }}>
+      <p>Ảnh</p>
+      <p>{this.props.data.name}</p>
+      <p>{this.props.data.price}</p>
+      <Button type="primary">Mua ngay</Button>
+    </Card>
     </Layout>;
   }
 }

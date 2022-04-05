@@ -3,7 +3,3 @@ export interface IProduct {
     price: number
 }
 
-export const defaultProduct = {
-    name: "",
-    price: 10000000
-}
